@@ -350,6 +350,27 @@ var Context = Obj.extend({
         for(var name in blocks) {
             this.addBlock(name, blocks[name]);
         }
+
+	var _this = this;
+        var arr = [];
+
+        for (var i in this.blocks){
+           arr.push(i);
+        }
+
+        this.env.globals.self = [];
+
+        function createfunc(i) {
+            return function() {
+                        var output = _this.blocks[i];
+                        output = JSON.parse(output.toString().split("+=")[1].split(";")[0]);
+                        return output;
+                    };
+        }
+
+        for (var i = 0; i < arr.length; i++) {
+            this.env.globals.self[arr[i]] = createfunc(arr[i]);
+        }
     },
 
     lookup: function(name) {
