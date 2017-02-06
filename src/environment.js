@@ -351,7 +351,7 @@ var Context = Obj.extend({
             this.addBlock(name, blocks[name]);
         }
 
-	var _this = this;
+	    var _this = this;
         var arr = [];
 
         for (var i in this.blocks){
@@ -363,8 +363,13 @@ var Context = Obj.extend({
         function createfunc(i) {
             return function() {
                         var output = _this.blocks[i];
-                        output = JSON.parse(output.toString().split("+=")[1].split(";")[0]);
-                        return output;
+                        var runtime = require('./runtime');
+                        var Frame = runtime.Frame;
+                        var _data;
+                        output[0](_this.env, _this.ctx,new Frame (), runtime,  function (i, data) {
+                            _data = data;
+                        })
+                        return _data;
                     };
         }
 
