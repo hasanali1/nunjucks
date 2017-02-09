@@ -173,5 +173,28 @@
 
             finish(done);
         });
+
+        it('01. should return the blocks using self', function(done) {
+          var env = new Environment(new Loader(templatesPath));
+          equal("<title>{% block title %}Hello{% endblock %}</title><h1>{{ self.title() }}</h1>" + 
+                "{% block body %}{% endblock %}","<title>Hello</title><h1>Hello</h1>", env);
+          finish(done);
+        });
+
+        it('02. should return the blocks using self', function(done){
+          var env = new Environment(new Loader(templatesPath));
+          equal("{{ self.foo() }}|{% block foo %}42{% endblock %}|{{ self.foo() }}","42|42|42", env);
+          finish(done);
+        });
+
+         it('03. should return the blocks using self', function(done){
+          var env = new Environment(new Loader(templatesPath));
+          var template = env.getTemplate('self-grandp.njk');
+          equal(template.render(),'CBA\n', env);
+          finish(done);
+        });
+
+
+
     });
 })();

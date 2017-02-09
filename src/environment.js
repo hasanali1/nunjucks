@@ -366,7 +366,7 @@ var Context = Obj.extend({
                         var runtime = require('./runtime');
                         var Frame = runtime.Frame;
                         var _data;
-                        output[0](_this.env, _this.ctx,new Frame (), runtime,  function (i, data) {
+                        output[0](_this.env, _this,new Frame (), runtime,  function (i, data) {
                             _data = data;
                         })
                         return _data;
