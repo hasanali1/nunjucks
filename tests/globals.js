@@ -190,7 +190,7 @@
          it('03. should return the blocks using self', function(done){
           var env = new Environment(new Loader(templatesPath));
           var template = env.getTemplate('self-grandp.njk');
-          equal(template.render(),'CBA\n', env);
+          equal(template.render(),'C\n', env);
           finish(done);
         });
 
