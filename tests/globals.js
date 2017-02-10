@@ -187,14 +187,27 @@
           finish(done);
         });
 
-         it('03. should return the blocks using self', function(done){
+        it('03. should return the blocks using self', function(done){
           var env = new Environment(new Loader(templatesPath));
           var template = env.getTemplate('self-grandp.njk');
           equal(template.render(),'C\n', env);
           finish(done);
         });
 
+        it('04. should return the blocks using self: with if - two level inheritance', function(done){
+          var env = new Environment(new Loader(templatesPath));
+          var result = render("{% extends 'self-with-if.njk' %}{% block header %}hello{% endblock %}");
+          equal(result,'\nhello\n\n', env);
+          finish(done);
+        });
 
+
+        it('05. should return the blocks using self: with if - three level inheritance', function(done){
+          var env = new Environment(new Loader(templatesPath));
+          var result = render("{% extends 'self-with-if-three-parent.njk' %}{% block header %}hello{% endblock %}");
+          equal(result,'\nhello\n\n', env);
+          finish(done);
+        });
 
     });
 })();
