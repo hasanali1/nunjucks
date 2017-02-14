@@ -614,6 +614,7 @@ Template = Obj.extend({
 });
 
 module.exports = {
+    Context: Context,
     Environment: Environment,
     Template: Template
 };
